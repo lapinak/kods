@@ -4,6 +4,7 @@ import datetime
 import time
 import yaml
 
+# First comment to check how things and if they work
 from datetime import datetime
 print('Asteroid processing service')
 
