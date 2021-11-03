@@ -3,7 +3,7 @@
 # Json - here used for fetching the provided data from the API
 # Datetime - to fetch the date 
 # Time - to fetch time
-# Yaml - to write the configuration files
+# Yaml - to access the configuration files
 
 import requests
 import json
@@ -11,33 +11,44 @@ import datetime
 import time
 import yaml
 
-# First comment to check how things and if they work
+# Imports the date and prints text in the console, starts processing the request
 from datetime import datetime
 print('Asteroid processing service')
 
 # Initiating and reading config values
 print('Loading configuration from file')
 
+# Defines the API key with which the asteroid data is accessed
+# Uses the URL to get to the data
 nasa_api_key = "tpTJMfWQc4JOtXZbpWotfhklh9oTlTirhRnDa1gX"
 nasa_api_url = "https://api.nasa.gov/neo/"
 
 # Getting todays date
+# .zfill adds a number of zeros to match the needed lenght, it fetches year, month and day
+# Prints out the date
 dt = datetime.now()
 request_date = str(dt.year) + "-" + str(dt.month).zfill(2) + "-" + str(dt.day).zfill(2)  
 print("Generated today's date: " + str(request_date))
 
-
+# Generates the URL with all the fetched data and the API
 print("Request url: " + str(nasa_api_url + "rest/v1/feed?start_date=" + request_date + "&end_date=" + request_date + "&api_key=" + nasa_api_key))
 r = requests.get(nasa_api_url + "rest/v1/feed?start_date=" + request_date + "&end_date=" + request_date + "&api_key=" + nasa_api_key)
 
+# Prints out the reuqest status code, which has to be 200, otherwise, it is not going to work
+# Then prints the headers
+# Then the content
 print("Response status code: " + str(r.status_code))
 print("Response headers: " + str(r.headers))
 print("Response content: " + str(r.text))
 
+# Checks if the HTTP code is 200 to parse the data
 if r.status_code == 200:
 
+	# Converts the received cntent data for python
 	json_data = json.loads(r.text)
 
+	# Defines the safe asteroid list
+	# Defines the hazardous asteroid list
 	ast_safe = []
 	ast_hazardous = []
 
