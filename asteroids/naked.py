@@ -1,3 +1,10 @@
+# Imports requests needed for the project
+# Requests - used for requesting data from different HTML places, e.g. API for this project
+# Json - here used for fetching the provided data from the API
+# Datetime - to fetch the date 
+# Time - to fetch time
+# Yaml - to write the configuration files
+
 import requests
 import json
 import datetime
